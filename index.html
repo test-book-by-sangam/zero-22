@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCA Premium Live Test</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background-color: #eef2f5; 
+            color: #333;
+            padding: 20px; 
+            margin: 0;
+        }
+        .container { 
+            background: white; 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 30px; 
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1); 
+            border-top: 8px solid #1a5276; 
+            border-radius: 8px;
+        }
+        .header { text-align: center; border-bottom: 2px solid #1a5276; padding-bottom: 15px; margin-bottom: 25px; }
+        .header h1 { margin: 0; color: #1a5276; font-size: 26px; }
+        .header h2 { margin: 5px 0 0; color: #555; font-size: 16px; }
+        .instructions { background: #fef9e7; padding: 15px; border-left: 5px solid #f39c12; font-size: 14px; margin-bottom: 25px; border-radius: 4px; }
+        .section-title { background: #1a5276; color: white; padding: 10px 15px; font-size: 16px; font-weight: bold; margin: 30px 0 15px 0; border-radius: 4px; }
+        .question-block { margin-bottom: 20px; padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; }
+        .question-text { font-weight: 600; color: #1e293b; margin-bottom: 12px; font-size: 15px; }
+        .options { display: flex; flex-direction: column; gap: 8px; }
+        .option-label { display: flex; align-items: center; padding: 8px 12px; background: white; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer; transition: 0.2s; font-size: 14px; }
+        .option-label:hover { background: #f1f5f9; }
+        .option-label input { margin-right: 10px; cursor: pointer; }
+        
+        /* Result Highlights */
+        .correct-answer { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724 !important; font-weight: bold; }
+        .wrong-answer { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24 !important; text-decoration: line-through; }
+        
+        .submit-btn { display: block; width: 100%; padding: 15px; background: #1a5276; color: white; border: none; font-size: 18px; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 30px; transition: 0.3s; }
+        .submit-btn:hover { background: #154360; }
+        
+        #result-box { display: none; background: #d4edda; color: #155724; border: 2px solid #28a745; padding: 20px; margin-top: 30px; text-align: center; border-radius: 8px; font-size: 22px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>12th - LIVE EXAM PORTAL</h1>
+        <h3>शिक्षा Online Test (50 Questions)</h3>
+<h2 style="font-size:10px; color:#888; font-weight:normal;">
+    यह test sangam (in id-@sangam__zero) द्वारा बनाया गया है। यदि आप भी अपने लिए इसी प्रकार का online test बनवाना चाहते हैं, तो 9241967602 पर Message कर सकते हैं।</h2>
+    </div>
+
+    <div class="instructions">
+        <strong>निर्देश:</strong> सभी प्रश्नों के उत्तर दें। प्रत्येक प्रश्न के 4 विकल्प हैं। परीक्षण पूरा करने के बाद <strong>"Submit Test"</strong> पर क्लिक करें ताकि आप अपना स्कोर और सही उत्तर देख सकें।
+    </div>
+
+    <form id="quizForm">
+        
+        <!-- SECTION 01 -->
+        <div class="section-title">SECTION 01. </div>
+        
+        <script>
+            // All 50 Questions Data (Generated Dynamically for clean code)
+           const questions = [
+                // SECTION - शिक्षा (जे० कृष्णमूर्ति) - Hindi 12th Objective Questions
+                { q: "1. जे० कृष्णमूर्ति की इनमें से कौन-सी रचना है ?", opt: ["रोज", "बातचीत", "सम्पूर्ण क्रांति", "शिक्षा"], ans: 3 },
+                { q: "2. जे० कृष्णमूर्ति का जन्म कहाँ हुआ था ?", opt: ["उत्तरप्रदेश में", "आन्ध्रप्रदेश में", "मध्यप्रदेश में", "कर्नाटक में"], ans: 1 },
+                { q: "3. माँ की मृत्यु के समय जे० कृष्णमूर्ति कितने वर्ष के थे ?", opt: ["10 वर्ष", "12 वर्ष", "15 वर्ष", "20 वर्ष"], ans: 0 },
+                { q: "4. जे० कृष्णमूर्ति की 'शिक्षा' कृति क्या है ?", opt: ["संभाषण", "निबंध", "संस्मरण", "एकांकी"], ans: 0 },
+                { q: "5. मेधा कहाँ नहीं हो सकती है ?", opt: ["जहाँ स्वतंत्रता हो", "जहाँ भय हो", "जहाँ अनुशासनहीनता हो", "इनमें से कोई नहीं"], ans: 1 },
+                { q: "6. लेखक के अनुसार कुछ परीक्षाएँ उत्तीर्ण कर लेने से कहीं ज्यादा कठिन क्या है ?", opt: ["जीवन में उन्नति करना", "जीवन खुशी पूर्वक व्यतीत करना", "जीवन को समझना", "इनमें से कोई नहीं"], ans: 2 },
+                { q: "7. लेखक के अनुसार सच्ची शिक्षा हमें क्या देती है ?", opt: ["रोजगार", "प्रसिद्धि", "व्यापकता", "इनमें कोई नहीं"], ans: 2 },
+                { q: "8. बचपन में किस वातावरण में रहना आवश्यक है ?", opt: ["स्वतंत्र", "अनुशासित", "दायित्वपूर्ण", "इनमें से कोई नहीं"], ans: 0 },
+                { q: "9. जिंदगी का अर्थ क्या है ?", opt: ["धन कमाना", "प्रसिद्धि प्राप्त करना", "सत्य की खोज करना", "सत्य प्राप्त करना"], ans: 2 },
+                { q: "10. जे० कृष्णमूर्ति के अनुसार मानव के विचारों को, उसके सम्बन्धों तथा उसके प्रेम को कौन नष्ट कर देता है ?", opt: ["उत्साह", "नाराजगी", "खुशी", "भय"], ans: 3 },
+                { q: "11. जे० कृष्णमूर्ति के अनुसार, सम्पूर्ण विश्व किस ओर अग्रसर है ?", opt: ["विकास की ओर", "नाश की ओर", "प्रतिस्पर्धा की ओर", "इनमें से कोई नहीं"], ans: 1 },
+                { q: "12. 'द फर्स्ट एंड लास्ट फ्रीडम' किसकी कृति है ?", opt: ["मलयज की", "मोहन राकेश की", "जे० कृष्णमूर्ति की", "अब्दुल कलाम आजाद की"], ans: 2 },
+                { q: "13. साम्यवादी किससे लड़ रहा है ?", opt: ["समाजवादी से", "पूँजीपति से", "सत्तावादी से", "इनमें से कोई नहीं"], ans: 1 },
+                { q: "14. जे० कृष्णमूर्ति का जन्म कब हुआ था ?", opt: ["12 मई 1895 को", "18 जून 1892 को", "23 मई 1898 को", "15 अगस्त 1902 को"], ans: 0 },
+                { q: "15. जे० कृष्णमूर्ति का पूरा नाम था ?", opt: ["जयंत कृष्णमूर्ति", "जिद्दू कृष्णमूर्ति", "जीवंत कृष्णमूर्ति", "जनेश कृष्णमूर्ति"], ans: 1 },
+                { q: "16. 'द फर्स्ट एंड लास्ट फ्रीडम' किसकी कृति है ?", opt: ["अब्दुल कलाम आजाद", "पट्टाभि सीतारमैया", "जे० कृष्णमूर्ति", "जाबिर हुसैन"], ans: 2 },
+                { q: "17. जे० कृष्णमूर्ति के संबंध में कौन-सा तथ्य सही है ?", opt: ["वे प्रायः लिखते थे", "वे उपन्यासकार थे", "वे प्रसिद्ध नाटककार थे", "वे प्रायः बोलते थे, संभाषण करते थे"], ans: 3 },
+                { q: "18. 'शिक्षा' पाठ के रचयिता कौन हैं ?", opt: ["महात्मा गाँधी", "विनोबा भावे", "जगदीशचंद्र माथुर", "जे० कृष्णमूर्ति"], ans: 3 },
+                { q: "19. जे० कृष्णमूर्ति का जन्म किस राज्य में हुआ था ?", opt: ["आंध्र प्रदेश में", "उत्तर प्रदेश में", "राजस्थान में", "उड़ीसा में"], ans: 0 },
+                { q: "20. लोग जे० कृष्णमूर्ति को किस रूप में देखते थे ?", opt: ["राधाकृष्णन में", "राजेन्द्र प्रसाद में", "गाँधी में", "विश्व शिक्षक के रूप में"], ans: 3 },
+                { q: "21. जे० कृष्णमूर्ति की इनमें से कौन-सी रचना है ?", opt: ["रोज", "संपूर्ण क्रान्ति", "बातचीत", "शिक्षा"], ans: 3 }
+            ];
+            // Render Questions
+            questions.forEach((item, index) => {
+                if(index === 10) document.write('<div class="section-title">SECTION 02. </div>');
+                if(index === 20) document.write('<div class="section-title">SECTION 03. </div>');
+                if(index === 30) document.write('<div class="section-title">SECTION 04. </div>');
+                if(index === 40) document.write('<div class="section-title">SECTION 05. </div>');
+
+                let optionsHTML = '';
+                item.opt.forEach((option, i) => {
+                    optionsHTML += `
+                        <label class="option-label" id="label-q${index}-opt${i}">
+                            <input type="radio" name="q${index}" value="${i}">
+                            ${String.fromCharCode(97 + i)}) ${option}
+                        </label>`;
+                });
+
+                document.write(`
+                    <div class="question-block" id="qBlock${index}">
+                        <div class="question-text">${item.q}</div>
+                        <div class="options">${optionsHTML}</div>
+                    </div>
+                `);
+            });
+        </script>
+
+        <button type="button" class="submit-btn" onclick="calculateScore()">Submit Test & Check Result</button>
+    </form>
+
+    <div id="result-box"></div>
+
+</div>
+
+<script>
+    function calculateScore() {
+        let score = 0;
+        let total = questions.length;
+
+        questions.forEach((item, index) => {
+            // Get selected option
+            let selected = document.querySelector(`input[name="q${index}"]:checked`);
+            let correctValue = item.ans;
+            
+            // Highlight correct answer permanently
+            let correctLabel = document.getElementById(`label-q${index}-opt${correctValue}`);
+            correctLabel.classList.add("correct-answer");
+
+            if (selected) {
+                let selectedValue = parseInt(selected.value);
+                if (selectedValue === correctValue) {
+                    score++;
+                } else {
+                    // Highlight wrong answer if user selected it
+                    let wrongLabel = document.getElementById(`label-q${index}-opt${selectedValue}`);
+                    wrongLabel.classList.add("wrong-answer");
+                }
+            }
+        });
+
+        // Show Score
+        let resultBox = document.getElementById('result-box');
+        resultBox.style.display = "block";
+        
+        let percentage = (score / total) * 100;
+        let message = "";
+        
+        if(percentage >= 80) message = "उत्कृष्ट प्रदर्शन! 🌟";
+        else if(percentage >= 50) message = "अच्छा प्रयास, थोड़ी और मेहनत करें! 👍";
+        else message = "आपको और अभ्यास की आवश्यकता है! 📚";
+
+        resultBox.innerHTML = `आपका स्कोर: ${score} / ${total} <br><span style="font-size:18px; color:#333;">${message}</span>`;
+        
+        // Scroll to result
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
